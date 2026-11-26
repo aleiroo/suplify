@@ -1,0 +1,23 @@
+const fs=require('fs');
+const path=require('path');
+const Database=require('better-sqlite3');
+const {CATALOG}=require('../data');
+const file=process.env.DB_FILE||path.join(__dirname,'..','data','bahantepat.sqlite');
+fs.mkdirSync(path.dirname(file),{recursive:true});
+const db=new Database(file);
+db.pragma('journal_mode = WAL');
+db.pragma('foreign_keys = ON');
+db.exec(`
+CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY AUTOINCREMENT,username TEXT UNIQUE NOT NULL,password_hash TEXT NOT NULL,role TEXT NOT NULL CHECK(role IN ('admin','kitchen','supplier')),name TEXT NOT NULL,created_at TEXT DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS sessions(token TEXT PRIMARY KEY,user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,expires_at INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS ingredients(id TEXT PRIMARY KEY,name TEXT NOT NULL,alias TEXT DEFAULT '',yield REAL DEFAULT 1,kkal REAL DEFAULT 0,protein REAL DEFAULT 0,fat REAL DEFAULT 0,carbs REAL DEFAULT 0,ref_price REAL DEFAULT 0);
+CREATE TABLE IF NOT EXISTS suppliers(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER UNIQUE REFERENCES users(id),name TEXT NOT NULL,address TEXT DEFAULT '',lat REAL,lng REAL,phone TEXT DEFAULT '',created_at TEXT DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS stocks(id INTEGER PRIMARY KEY AUTOINCREMENT,supplier_id INTEGER NOT NULL REFERENCES suppliers(id) ON DELETE CASCADE,ingredient_id TEXT NOT NULL REFERENCES ingredients(id),quantity_kg REAL NOT NULL DEFAULT 0,price_per_kg REAL NOT NULL DEFAULT 0,updated_at TEXT DEFAULT CURRENT_TIMESTAMP,UNIQUE(supplier_id,ingredient_id));
+CREATE TABLE IF NOT EXISTS plans(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER REFERENCES users(id),payload TEXT NOT NULL,created_at TEXT DEFAULT CURRENT_TIMESTAMP);
+`);
+const add=db.prepare(`INSERT OR IGNORE INTO ingredients(id,name,alias,yield,kkal,protein,fat,carbs,ref_price) VALUES(@id,@name,@alias,@yield,@kkal,@protein,@fat,@carbs,@ref_price)`);
+const tx=db.transaction(()=>CATALOG.forEach(c=>add.run({id:c.id,name:c.name,alias:c.alias,yield:c.yield,kkal:c.n[0],protein:c.n[1],fat:c.n[2],carbs:c.n[3],ref_price:c.ref})));
+tx();
+console.log('Database dan seluruh tabel siap:',file);
+console.log('Katalog awal:',CATALOG.length,'bahan. Akun demo dibuat saat npm start pertama kali.');
+db.close();

@@ -1,0 +1,19 @@
+{
+  "name": "bahantepat",
+  "version": "2.0.0",
+  "description": "BahanTepat - platform perencanaan kebutuhan dapur dan supplier",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:init": "node scripts/init-db.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.6.1"
+  }
+}

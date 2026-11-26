@@ -1,0 +1,1562 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Suplify — Dapur cerdas</title>
+    <style>
+        :root {
+            --bg: #f4f7f2;
+            --surface: #fff;
+            --ink: #17251c;
+            --muted: #66756b;
+            --green: #17633b;
+            --green2: #e4f2e8;
+            --lime: #c9ef79;
+            --line: #e1e9df;
+            --red: #b42318;
+            --amber: #fff2cf;
+            --shadow: 0 12px 35px #183b2510
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 15px/1.55 Inter, system-ui, sans-serif
+        }
+
+        header {
+            background: linear-gradient(115deg, #103d28, #197247);
+            color: white;
+            padding: 22px max(20px, calc((100% - 1120px)/2));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap
+        }
+
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: #ffffff20;
+            display: grid;
+            place-items: center;
+            font-size: 24px
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 25px;
+            letter-spacing: -.7px
+        }
+
+        .brand p {
+            margin: 2px 0 0;
+            color: #d5e9dc
+        }
+
+        main {
+            max-width: 1120px;
+            margin: auto;
+            padding: 25px 20px 70px
+        }
+
+        .hide {
+            display: none !important
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 21px;
+            margin: 16px 0;
+            box-shadow: var(--shadow)
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 0 0 15px;
+            letter-spacing: -.4px
+        }
+
+        h3 {
+            margin: 0 0 7px;
+            font-size: 16px
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .small {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        input,
+        select {
+            font: inherit;
+            border: 1px solid #d5e0d5;
+            border-radius: 10px;
+            padding: 11px 12px;
+            background: #fff;
+            color: var(--ink);
+            width: 100%;
+            min-width: 0
+        }
+
+        input:focus,
+        select:focus {
+            outline: 3px solid #c9ef7980;
+            border-color: var(--green)
+        }
+
+        button {
+            font: inherit;
+            border: 0;
+            border-radius: 10px;
+            padding: 11px 16px;
+            background: var(--green);
+            color: #fff;
+            font-weight: 650;
+            cursor: pointer;
+            transition: .15s
+        }
+
+        button:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px)
+        }
+
+        button:disabled {
+            opacity: .55;
+            cursor: wait;
+            transform: none
+        }
+
+        .secondary {
+            background: var(--green2);
+            color: var(--green)
+        }
+
+        .danger {
+            background: #fff0ee;
+            color: var(--red)
+        }
+
+        .ghost {
+            background: transparent;
+            color: var(--muted);
+            padding: 8px
+        }
+
+        .login {
+            max-width: 430px;
+            margin: 8vh auto
+        }
+
+        .login .hero {
+            background: linear-gradient(135deg, #e5f4e8, #f6f9ed);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 18px
+        }
+
+        .formgrid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            margin: 0 0 5px
+        }
+
+        .menu-row {
+            display: grid;
+            grid-template-columns: 1fr 130px 42px;
+            gap: 9px;
+            margin: 9px 0;
+            align-items: center
+        }
+
+        .actions {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin-top: 14px
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px
+        }
+
+        .stat {
+            background: #f6faf5;
+            border: 1px solid var(--line);
+            padding: 14px;
+            border-radius: 14px
+        }
+
+        .stat strong {
+            font-size: 23px;
+            display: block
+        }
+
+        .stat span {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+            gap: 12px
+        }
+
+        .nutrition {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            margin: 15px 0
+        }
+
+        .nutrition div {
+            text-align: center;
+            background: #f6faf5;
+            padding: 9px 3px;
+            border-radius: 10px
+        }
+
+        .nutrition b {
+            display: block;
+            font-size: 18px
+        }
+
+        .nutrition span {
+            font-size: 11px;
+            color: var(--muted)
+        }
+
+        .pill {
+            display: inline-block;
+            border-radius: 50px;
+            padding: 4px 9px;
+            background: var(--green2);
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 700
+        }
+
+        .pill.warn {
+            background: var(--amber);
+            color: #805900
+        }
+
+        .tablewrap {
+            overflow: auto
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 540px
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 11px 8px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        th {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        td input {
+            max-width: 120px;
+            padding: 8px
+        }
+
+        .menu-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 14px
+        }
+
+        .tab {
+            background: #e8eee8;
+            color: #526257
+        }
+
+        .tab.active {
+            background: var(--green);
+            color: white
+        }
+
+        .supplier-card {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 16px;
+            margin: 12px 0
+        }
+
+        .supplier-card.best {
+            border: 2px solid #a6d65b
+        }
+
+        .bar {
+            height: 8px;
+            background: #edf1eb;
+            border-radius: 9px;
+            overflow: hidden;
+            margin: 9px 0
+        }
+
+        .bar i {
+            display: block;
+            height: 100%;
+            background: #60a86f
+        }
+
+        .notice {
+            background: var(--amber);
+            padding: 10px 13px;
+            border-radius: 10px;
+            margin: 9px 0;
+            color: #765300;
+            font-size: 13px
+        }
+
+        .success {
+            background: #e5f5e9;
+            color: #1b6239;
+            padding: 10px 13px;
+            border-radius: 10px
+        }
+
+        @media(max-width:640px) {
+            main {
+                padding: 14px 12px 45px
+            }
+
+            .card {
+                padding: 16px
+            }
+
+            .formgrid {
+                grid-template-columns: 1fr
+            }
+
+            .menu-row {
+                grid-template-columns: 1fr 90px 38px
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .brand h1 {
+                font-size: 21px
+            }
+        }
+
+        /* BahanTepat refresh: modern, clean and responsive */
+        :root {
+            --bg: #f3f6f4;
+            --surface: #fff;
+            --ink: #17251f;
+            --muted: #718078;
+            --green: #087f5b;
+            --green2: #e5f5ee;
+            --lime: #c9f36a;
+            --line: #e4ebe6;
+            --shadow: 0 16px 44px rgba(17, 54, 38, .075)
+        }
+
+        body {
+            background: radial-gradient(ellipse at 85% 0%, #e5f4eb 0, transparent 34%), var(--bg);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif
+        }
+
+        header {
+            background: linear-gradient(120deg, #082f24 0%, #087f5b 65%, #15966d 100%);
+            padding-top: 20px;
+            padding-bottom: 20px;
+            box-shadow: 0 8px 28px #063b2a25
+        }
+
+        .logo {
+            background: #ffffff20;
+            border: 1px solid #ffffff25;
+            box-shadow: inset 0 1px #ffffff25
+        }
+
+        .brand h1 {
+            font-size: 27px;
+            letter-spacing: -1px
+        }
+
+        .brand p {
+            font-size: 13px;
+            opacity: .88
+        }
+
+        main {
+            max-width: 1180px;
+            padding-top: 30px
+        }
+
+        .card {
+            border: 1px solid #e7eee9;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--shadow)
+        }
+
+        h2 {
+            font-size: 22px;
+            letter-spacing: -.7px
+        }
+
+        h3 {
+            letter-spacing: -.25px
+        }
+
+        input,
+        select {
+            border: 1px solid #dce7df;
+            border-radius: 12px;
+            padding: 12px 13px;
+            transition: border .18s, box-shadow .18s
+        }
+
+        input:focus,
+        select:focus {
+            outline: 0;
+            border-color: #15966d;
+            box-shadow: 0 0 0 4px #15966d18
+        }
+
+        button {
+            border-radius: 12px;
+            padding: 11px 17px;
+            background: linear-gradient(135deg, #087f5b, #0b9369);
+            box-shadow: 0 5px 13px #087f5b20
+        }
+
+        button:hover {
+            filter: brightness(1.04);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px #087f5b25
+        }
+
+        button.secondary {
+            background: #e8f5ee;
+            color: #08734f;
+            box-shadow: none;
+            border: 1px solid #d8eee2
+        }
+
+        button.ghost {
+            box-shadow: none
+        }
+
+        .login {
+            margin-top: 7vh
+        }
+
+        .login .hero {
+            background: linear-gradient(135deg, #e2f5e9, #f2f8e9);
+            border: 1px solid #d8ecdf;
+            padding: 22px
+        }
+
+        .menu-tabs {
+            gap: 10px
+        }
+
+        .tab {
+            border: 1px solid #e0e9e2
+        }
+
+        .tab.active {
+            background: #087f5b
+        }
+
+        .mode-switch {
+            display: flex;
+            gap: 8px;
+            background: #e8efea;
+            padding: 6px;
+            border-radius: 15px;
+            width: max-content;
+            max-width: 100%;
+            margin: 4px 0 18px
+        }
+
+        .mode-tab {
+            background: transparent;
+            color: #607067;
+            box-shadow: none;
+            border: 1px solid transparent;
+            padding: 10px 17px
+        }
+
+        .mode-tab.active {
+            background: #fff;
+            color: #087f5b;
+            border-color: #e1ebe4;
+            box-shadow: 0 3px 12px #183b2510
+        }
+
+        .mode-tab span {
+            margin-right: 5px
+        }
+
+        .planner-hero {
+            background: linear-gradient(145deg, #fff 0%, #fbfefb 100%);
+            border-color: #deebe2
+        }
+
+        .planner-hero h2 {
+            font-size: 25px;
+            margin: 5px 0 7px
+        }
+
+        .planner-hero>p {
+            max-width: 720px;
+            margin-top: 0
+        }
+
+        .eyebrow {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            color: #07845d
+        }
+
+        .helper-note {
+            margin-top: 14px;
+            color: #89958e
+        }
+
+        .menu-row {
+            grid-template-columns: minmax(0, 1fr) 130px 42px;
+            gap: 10px;
+            margin: 12px 0
+        }
+
+        .stats {
+            gap: 14px
+        }
+
+        .stat {
+            background: linear-gradient(145deg, #f8fcf9, #eff8f2);
+            border-color: #e1eee5;
+            border-radius: 16px;
+            padding: 17px
+        }
+
+        .stat strong {
+            color: #087f5b;
+            font-size: 25px
+        }
+
+        .supplier-card {
+            border-radius: 16px;
+            background: #fff
+        }
+
+        .supplier-card.best {
+            border-color: #8bcf9f;
+            background: linear-gradient(135deg, #fbfffc, #f2fbf5)
+        }
+
+        .pill {
+            padding: 5px 10px
+        }
+
+        .nutrition div {
+            background: #f1f8f3;
+            border: 1px solid #e7f0e8
+        }
+
+        .tablewrap {
+            border: 1px solid #e7eee9;
+            border-radius: 14px
+        }
+
+        table {
+            min-width: 580px
+        }
+
+        th {
+            background: #f7faf8
+        }
+
+        th,
+        td {
+            padding: 12px 10px
+        }
+
+        .notice {
+            border: 1px solid #f1dfad;
+            border-radius: 12px
+        }
+
+        .success {
+            border-radius: 12px
+        }
+
+        #pageTitle {
+            font-size: 26px;
+            margin-bottom: 3px
+        }
+
+        #roleDesc {
+            font-size: 14px
+        }
+
+        #account {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        #who {
+            font-size: 13px;
+            color: #e7f5eb
+        }
+
+        @media(max-width:640px) {
+            header {
+                padding: 16px
+            }
+
+            .brand h1 {
+                font-size: 23px
+            }
+
+            .card {
+                padding: 17px;
+                border-radius: 17px
+            }
+
+            .planner-hero h2 {
+                font-size: 21px
+            }
+
+            .mode-switch {
+                width: 100%
+            }
+
+            .mode-tab {
+                flex: 1;
+                padding: 10px 8px;
+                font-size: 13px
+            }
+
+            .menu-row {
+                grid-template-columns: minmax(0, 1fr) 88px 38px;
+                gap: 7px
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .actions button {
+                flex: 1
+            }
+
+            .toolbar {
+                align-items: flex-start
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="brand">
+            <div class="logo">🥬</div>
+            <div>
+                <h1>Suplify</h1>
+                <p>Perencanaan bahan, gizi, dan rantai pasok dapur</p>
+            </div>
+        </div>
+        <div id="account" class="hide"><span id="who"></span> <button class="secondary" id="logout">Keluar</button>
+        </div>
+    </header>
+    <main>
+        <section id="login" class="card login">
+            <div class="hero">
+                <h2>Selamat datang 👋</h2>
+                <div class="muted">Masuk ke ruang kerja BahanTepat.</div>
+            </div>
+            <div class="field"><label>Username</label><input id="username" value="dapur" autocomplete="username"></div>
+            <div class="field" style="margin-top:12px"><label>Password</label><input id="password" type="password"
+                    value="dapur12345" autocomplete="current-password"></div>
+            <div class="actions"><button id="loginBtn" style="width:100%">Masuk</button></div>
+            <p class="small">Demo: admin / admin12345 · dapur / dapur12345 · supplier / supplier12345</p>
+            <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+            <h3>Daftar sebagai supplier</h3>
+            <div class="formgrid">
+                <div class="field"><label>Nama usaha</label><input id="regName" placeholder="Nama supplier"></div>
+                <div class="field"><label>Username</label><input id="regUser" placeholder="username"></div>
+                <div class="field"><label>Password (min. 8 karakter)</label><input id="regPass" type="password"></div>
+                <div class="field"><label>Nomor telepon</label><input id="regPhone"></div>
+            </div>
+            <div class="field" style="margin-top:10px"><label>Alamat / lokasi usaha</label><input id="regAddress"
+                    placeholder="Kecamatan, kota, alamat"></div><button class="secondary" id="register"
+                style="margin-top:12px">Daftar supplier</button>
+        </section>
+        <div id="workspace" class="hide">
+            <div class="toolbar">
+                <div>
+                    <h2 id="pageTitle">Dashboard</h2>
+                    <div id="roleDesc" class="muted"></div>
+                </div><span id="aiBadge" class="pill">AI status</span>
+            </div>
+            <section id="kitchenView" class="hide">
+
+                <div class="menu-tabs">
+                    <button class="tab active" id="tabPlanner" type="button">
+                        Perencanaan
+                    </button>
+                    <button class="tab" id="tabRecipes" type="button">
+                        Resep Saya
+                    </button>
+                </div>
+
+                <div id="plannerView">
+                    <div class="mode-switch">
+                        <button class="mode-tab active" id="modeAI" type="button"><span>✦</span> Estimasi AI</button>
+                        <button class="mode-tab" id="modeSaved" type="button"><span>▤</span> Resep tersimpan</button>
+                    </div>
+                    <div id="aiPlannerView">
+                        <div class="card planner-hero">
+                            <div class="eyebrow">PERENCANAAN CERDAS</div>
+                            <h2>Menu apa yang ingin kamu siapkan?</h2>
+                            <p class="muted">Tulis nama menu bebas. AI akan memperkirakan bahan, kebutuhan, kandungan
+                                gizi, dan biaya berdasarkan katalog bahan.</p>
+                            <div id="menuRows"></div>
+                            <div class="actions">
+                                <button class="secondary" id="addMenu" type="button">＋ Tambah menu</button>
+                                <button class="ghost" id="resetMenus" type="button">Reset</button>
+                                <button id="calculateAI" type="button">✦ Buat estimasi AI</button>
+                            </div>
+                            <div class="small helper-note">Maksimal 10 menu per permintaan · Hasil AI merupakan
+                                estimasi, bukan resep baku.</div>
+                        </div>
+                    </div>
+                    <div id="savedRecipePlannerView" class="hide">
+                        <div class="card planner-hero">
+                            <div class="toolbar">
+                                <div>
+                                    <div class="eyebrow">PERHITUNGAN PRESISI</div>
+                                    <h2>Gunakan resep dapur</h2>
+                                    <p class="muted">Pilih resep tersimpan dan tentukan target porsi. Komposisi resep
+                                        tidak diubah.</p>
+                                </div><button class="secondary" id="refreshPlanner" type="button">↻ Muat ulang</button>
+                            </div>
+                            <div id="plannerRecipeRows"></div>
+                            <div class="actions"><button class="secondary" id="addPlannerRecipe" type="button">＋ Tambah
+                                    resep</button><button id="calculate" type="button">Hitung kebutuhan bahan →</button>
+                            </div>
+                        </div>
+                    </div>
+                    <section id="planView" class="hide"></section>
+                    <section id="rankView" class="hide"></section>
+                </div>
+
+                <section id="recipeView" class="hide">
+                    <div class="card">
+                        <div class="toolbar">
+                            <div>
+                                <h2>Resep Saya</h2>
+                                <div class="muted">
+                                    Simpan resep dan komposisi bahan untuk digunakan kembali.
+                                </div>
+                            </div>
+                            <button id="addRecipe">＋ Buat resep</button>
+                        </div>
+
+                        <div id="recipeContent">
+                            <p class="muted">Memuat daftar resep...</p>
+                        </div>
+
+                        <div id="recipeForm" class="card hide">
+                            <h2 id="recipeFormTitle">Buat resep baru</h2>
+
+                            <div class="field">
+                                <label>Nama resep</label>
+                                <input id="recipeName" placeholder="Contoh: Ayam kecap">
+                            </div>
+
+                            <div class="formgrid" style="margin-top:12px">
+                                <div class="field">
+                                    <label>Jumlah porsi dasar</label>
+                                    <input id="recipePortions" type="number" min="0.01" step="any" value="10">
+                                </div>
+                                <div class="field">
+                                    <label>Catatan (opsional)</label>
+                                    <input id="recipeNotes" placeholder="Contoh: Untuk menu makan siang">
+                                </div>
+                            </div>
+
+                            <h3 style="margin-top:20px">Daftar bahan</h3>
+
+                            <div id="recipeIngredientRows"></div>
+
+                            <div class="actions">
+                                <button type="button" class="secondary" id="addRecipeIngredient">
+                                    ＋ Tambah bahan
+                                </button>
+                            </div>
+
+                            <div class="actions">
+                                <button type="button" id="saveRecipe">Simpan resep</button>
+                                <button type="button" class="secondary" id="cancelRecipe">
+                                    Batal
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+            <section id="supplierView" class="hide">
+                <div class="stats" id="supplierStats"></div>
+                <div class="card">
+                    <h2>Profil dan lokasi usaha</h2>
+                    <div class="formgrid">
+                        <div class="field"><label>Nama usaha</label><input id="sName"></div>
+                        <div class="field"><label>Telepon / WhatsApp</label><input id="sPhone"></div>
+                        <div class="field"><label>Latitude</label><input id="sLat" type="number" step="any"></div>
+                        <div class="field"><label>Longitude</label><input id="sLng" type="number" step="any"></div>
+                    </div>
+                    <div class="field" style="margin-top:10px"><label>Alamat lengkap / area layanan</label><input
+                            id="sAddress"></div><button id="saveProfile" style="margin-top:12px">Simpan profil</button>
+                </div>
+                <div class="card">
+                    <div class="toolbar">
+                        <h2>Stok dan harga barang</h2><button class="secondary" id="refreshStock">↻ Refresh
+                            stok</button>
+                    </div>
+                    <div class="tablewrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Bahan</th>
+                                    <th>Stok (kg)</th>
+                                    <th>Harga/kg (Rp)</th>
+                                    <th>Terakhir diperbarui</th>
+                                </tr>
+                            </thead>
+                            <tbody id="stockRows"></tbody>
+                        </table>
+                    </div><button id="saveStock" style="margin-top:12px">Simpan perubahan stok</button>
+                </div>
+                <div class="card">
+                    <h2>Tambah barang baru ke katalog</h2>
+                    <div class="formgrid">
+                        <div class="field"><label>Nama bahan</label><input id="newItemName"
+                                placeholder="Contoh: Jamur tiram"></div>
+                        <div class="field"><label>Alias (opsional)</label><input id="newItemAlias"></div>
+                        <div class="field"><label>Harga acuan/kg (Rp)</label><input id="newItemPrice" type="number"
+                                min="0" value="0"></div>
+                    </div><button id="addCatalog" style="margin-top:12px">Tambah barang</button>
+                    <p class="small">Nutrisi bahan baru diset nol sampai data TKPI diverifikasi; jangan dianggap nilai
+                        gizi resmi.</p>
+                </div>
+            </section>
+            <section id="adminView" class="hide">
+                <div class="card">
+                    <div class="toolbar">
+                        <h2>Ringkasan platform</h2><button class="secondary" id="refreshAdmin">↻ Refresh</button>
+                    </div>
+                    <div id="adminStats" class="stats"></div>
+                    <h3 style="margin-top:20px">Pengguna</h3>
+                    <div class="tablewrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Username</th>
+                                    <th>Role</th>
+                                    <th>Dibuat</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userRows"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>Buat akun pengguna</h2>
+                    <div class="formgrid">
+                        <div class="field"><label>Nama</label><input id="aName"></div>
+                        <div class="field"><label>Username</label><input id="aUser"></div>
+                        <div class="field"><label>Password</label><input id="aPass" type="password"></div>
+                        <div class="field"><label>Role</label><select id="aRole">
+                                <option value="kitchen">Dapur</option>
+                                <option value="supplier">Supplier</option>
+                                <option value="admin">Admin</option>
+                            </select></div>
+                    </div><button id="createUser" style="margin-top:12px">Buat akun</button>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script>
+        const $ = s => document.querySelector(s);
+
+        let token = '', me = null, currentPlan = null, editingRecipeId = null;
+        let plannerRecipes = [];
+        let catalogItems = [];
+
+        const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        const rp = n => 'Rp ' + Math.round(Number(n) || 0).toLocaleString('id-ID');
+        async function api(path, body, method = 'POST') { const r = await fetch('/api/' + path, { method, headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: 'Bearer ' + token } : {}) }, ...(body ? { body: JSON.stringify(body) } : {}) }); const j = await r.json(); if (!r.ok) throw Error(j.error || 'Permintaan gagal'); return j }
+        function notice(msg) { alert(msg) }
+        function menuRow(name = '', portions = 100) { const d = document.createElement('div'); d.className = 'menu-row'; d.innerHTML = `<input class="mname" placeholder="Contoh: Rendang daging, gado-gado, rawon..." value="${String(name).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))}"><input class="portion" type="number" min="1" max="5000" value="${portions}" aria-label="Jumlah porsi"><button class="danger remove" title="Hapus menu">×</button>`; d.querySelector('.remove').onclick = () => { d.remove(); if (!$('#menuRows').children.length) menuRow(); $('#planView').classList.add('hide'); $('#rankView').classList.add('hide') }; $('#menuRows').append(d) }
+        function showPlannerMode(mode) { const ai = mode === 'ai'; $('#aiPlannerView').classList.toggle('hide', !ai); $('#savedRecipePlannerView').classList.toggle('hide', ai); $('#modeAI').classList.toggle('active', ai); $('#modeSaved').classList.toggle('active', !ai); $('#planView').classList.add('hide'); $('#rankView').classList.add('hide'); if (ai && !$('#menuRows').children.length) menuRow(); if (!ai) loadPlannerData() }
+        $('#modeAI').onclick = () => showPlannerMode('ai'); $('#modeSaved').onclick = () => showPlannerMode('saved');
+        function setView() {
+            const role = me.role;
+
+            $('#login').classList.add('hide');
+            $('#workspace').classList.remove('hide');
+            $('#account').classList.remove('hide');
+
+            $('#who').textContent = me.name + ' · ' + role;
+
+            $('#kitchenView').classList.toggle(
+                'hide',
+                !['kitchen', 'admin'].includes(role)
+            );
+
+            $('#supplierView').classList.toggle('hide', role !== 'supplier');
+            $('#adminView').classList.toggle('hide', role !== 'admin');
+
+            $('#pageTitle').textContent =
+                role === 'supplier' ? 'Dashboard Supplier' :
+                    role === 'admin' ? 'Dashboard Admin' :
+                        'Dashboard Dapur';
+
+            $('#roleDesc').textContent =
+                role === 'supplier'
+                    ? 'Kelola profil, lokasi, stok, dan harga barang.'
+                    : role === 'admin'
+                        ? 'Kelola akun dan pantau aktivitas platform.'
+                        : 'Rencanakan kebutuhan bahan dan temukan supplier.';
+
+            if (role === 'kitchen' || role === 'admin') {
+                $('#plannerRecipeRows').innerHTML = '';
+                showKitchenTab('planner');
+                showPlannerMode('ai');
+            }
+        }
+
+        // Memuat resep dan katalog bahan
+        async function loadPlannerData() {
+            try {
+                const [recipeData, catalogData] = await Promise.all([
+                    api('recipes', null, 'GET'),
+                    api('catalog', null, 'GET')
+                ]);
+
+                plannerRecipes = recipeData.recipes || [];
+                catalogItems = catalogData.items || [];
+
+                if (!$('#plannerRecipeRows').children.length) {
+                    addPlannerRecipeRow();
+                } else {
+                    document.querySelectorAll('.planner-recipe-select').forEach(select => {
+                        const selected = select.value;
+                        select.innerHTML = plannerRecipeOptions();
+                        select.value = selected;
+                    });
+                }
+
+            } catch (e) {
+                notice('Gagal memuat data perencanaan: ' + e.message);
+            }
+        }
+
+        // Pilihan resep pada dropdown
+        function plannerRecipeOptions() {
+            return `
+    <option value="">Pilih resep...</option>
+    ${plannerRecipes.map(r => `
+      <option value="${r.id}">${esc(r.name)}</option>
+    `).join('')}
+  `;
+        }
+
+        // Menambahkan baris pilihan resep
+        function addPlannerRecipeRow() {
+            const row = document.createElement('div');
+            row.className = 'menu-row planner-recipe-row';
+            row.style.gridTemplateColumns = '1fr 130px 42px';
+
+            row.innerHTML = `
+    <select class="planner-recipe-select">
+      ${plannerRecipeOptions()}
+    </select>
+
+    <input class="planner-portions"
+      type="number"
+      min="1"
+      step="1"
+      value="100"
+      aria-label="Target porsi">
+
+    <button type="button" class="danger">×</button>
+  `;
+
+            row.querySelector('button').onclick = () => {
+                row.remove();
+
+                if (!$('#plannerRecipeRows').children.length) {
+                    addPlannerRecipeRow();
+                }
+            };
+
+            $('#plannerRecipeRows').append(row);
+        }
+
+        // Navigasi halaman dapur
+        function showKitchenTab(tab) {
+            const planner = tab === 'planner';
+
+            $('#plannerView').classList.toggle('hide', !planner);
+            $('#recipeView').classList.toggle('hide', planner);
+
+            $('#tabPlanner').classList.toggle('active', planner);
+            $('#tabRecipes').classList.toggle('active', !planner);
+
+            $('#pageTitle').textContent = planner
+                ? 'Perencanaan Dapur'
+                : 'Resep Saya';
+
+            if (planner) loadPlannerData();
+            else loadRecipes();
+        }
+
+        $('#tabPlanner').onclick = () => showKitchenTab('planner');
+        $('#tabRecipes').onclick = () => showKitchenTab('recipes');
+
+        // Memuat daftar resep dari server
+        // Memuat daftar resep
+        async function loadRecipes() {
+            const content = $('#recipeContent');
+
+            content.innerHTML = '<p class="muted">Memuat daftar resep...</p>';
+
+            try {
+                const data = await api('recipes', null, 'GET');
+
+                if (!data.recipes.length) {
+                    content.innerHTML = `
+        <div class="notice">
+          Belum ada resep tersimpan. Klik "Buat resep" untuk menambahkan resep pertama.
+        </div>
+      `;
+                    return;
+                }
+
+                content.innerHTML = `
+      <div class="grid">
+        ${data.recipes.map(r => `
+          <article class="supplier-card">
+            <h3>${esc(r.name)}</h3>
+            <div class="small">
+              ${r.base_portions} porsi dasar ·
+              ${r.ingredient_count} bahan
+            </div>
+            <div class="actions">
+              <button class="secondary recipe-detail" data-id="${r.id}">
+                Detail
+              </button>
+              <button class="secondary recipe-edit" data-id="${r.id}">
+                Edit
+              </button>
+              <button class="danger recipe-delete" data-id="${r.id}">
+                Hapus
+              </button>
+            </div>
+          </article>
+        `).join('')}
+      </div>
+    `;
+
+                document.querySelectorAll('.recipe-detail').forEach(b => {
+                    b.onclick = () => showRecipeDetail(b.dataset.id);
+                });
+
+                document.querySelectorAll('.recipe-edit').forEach(b => {
+                    b.onclick = () => editRecipe(b.dataset.id);
+                });
+
+                document.querySelectorAll('.recipe-delete').forEach(b => {
+                    b.onclick = () => deleteRecipe(b.dataset.id);
+                });
+
+            } catch (e) {
+                content.innerHTML = `<div class="notice">${esc(e.message)}</div>`;
+            }
+        }
+
+        // Menampilkan detail resep
+        async function showRecipeDetail(id) {
+            try {
+                const data = await api('recipes/' + id, null, 'GET');
+                const r = data.recipe;
+
+                $('#recipeContent').innerHTML = `
+      <div class="card">
+        <div class="toolbar">
+          <div>
+            <h2>${esc(r.name)}</h2>
+            <div class="muted">${r.base_portions} porsi dasar</div>
+          </div>
+          <button class="secondary" id="backRecipes">← Kembali</button>
+        </div>
+
+        ${r.notes ? `<p class="muted">${esc(r.notes)}</p>` : ''}
+
+        <h3>Komposisi bahan</h3>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Bahan</th>
+                <th>Jumlah</th>
+                <th>Satuan</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.ingredients.map(i => `
+                <tr>
+                  <td>${esc(i.ingredient_name)}</td>
+                  <td>${i.quantity}</td>
+                  <td>${esc(i.unit)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="actions">
+          <button class="secondary" id="detailEdit">Edit resep</button>
+          <button class="danger" id="detailDelete">Hapus resep</button>
+        </div>
+      </div>
+    `;
+
+                $('#backRecipes').onclick = loadRecipes;
+                $('#detailEdit').onclick = () => editRecipe(id);
+                $('#detailDelete').onclick = () => deleteRecipe(id);
+
+            } catch (e) {
+                notice(e.message);
+            }
+        }
+
+        // Membuka resep untuk diedit
+        async function editRecipe(id) {
+            try {
+                const data = await api('recipes/' + id, null, 'GET');
+                const r = data.recipe;
+
+                editingRecipeId = Number(id);
+
+                $('#recipeFormTitle').textContent = 'Edit resep';
+                $('#recipeName').value = r.name;
+                $('#recipePortions').value = r.base_portions;
+                $('#recipeNotes').value = r.notes || '';
+                $('#recipeIngredientRows').innerHTML = '';
+
+                data.ingredients.forEach(i => {
+                    addRecipeIngredientRow(
+                        i.ingredient_name,
+                        i.quantity,
+                        i.unit
+                    );
+                });
+
+                $('#recipeContent').classList.add('hide');
+                $('#recipeForm').classList.remove('hide');
+
+            } catch (e) {
+                notice(e.message);
+            }
+        }
+
+        // Menghapus resep
+        async function deleteRecipe(id) {
+            if (!confirm('Yakin ingin menghapus resep ini?')) return;
+
+            try {
+                await api('recipes/' + id, null, 'DELETE');
+                notice('Resep berhasil dihapus.');
+                await loadRecipes();
+            } catch (e) {
+                notice(e.message);
+            }
+        }
+
+        // Menambahkan satu baris bahan ke formulir resep
+        function addRecipeIngredientRow(name = '', quantity = '', unit = '') {
+            const row = document.createElement('div');
+            row.className = 'menu-row recipe-ingredient-row';
+
+            row.style.gridTemplateColumns = '1fr 110px 110px 42px';
+
+            row.innerHTML = `
+    <input class="ri-name"
+      placeholder="Nama bahan"
+      value="${esc(name)}">
+
+    <input class="ri-quantity"
+      type="number"
+      min="0.01"
+      step="any"
+      placeholder="Jumlah"
+      value="${esc(quantity)}">
+
+    <input class="ri-unit"
+      placeholder="Satuan"
+      value="${esc(unit)}">
+
+    <button type="button" class="danger ri-remove">×</button>
+  `;
+
+            row.querySelector('.ri-remove').onclick = () => {
+                row.remove();
+            };
+
+            $('#recipeIngredientRows').append(row);
+        }
+
+        // Membuka formulir resep baru
+        function openRecipeForm() {
+            editingRecipeId = null;
+
+            $('#recipeFormTitle').textContent = 'Buat resep baru';
+            $('#recipeName').value = '';
+            $('#recipePortions').value = 10;
+            $('#recipeNotes').value = '';
+            $('#recipeIngredientRows').innerHTML = '';
+
+            addRecipeIngredientRow();
+
+            $('#recipeContent').classList.add('hide');
+            $('#recipeForm').classList.remove('hide');
+        }
+
+        // Menutup formulir resep
+        function closeRecipeForm() {
+            editingRecipeId = null;
+            $('#recipeForm').classList.add('hide');
+            $('#recipeContent').classList.remove('hide');
+        }
+
+        // Tombol buat resep
+        $('#addRecipe').onclick = openRecipeForm;
+
+        // Tombol tambah bahan
+        $('#addRecipeIngredient').onclick = () => {
+            addRecipeIngredientRow();
+        };
+
+        // Tombol batal
+        $('#cancelRecipe').onclick = closeRecipeForm;
+
+        // Simpan resep ke server
+        $('#saveRecipe').onclick = async () => {
+            const name = $('#recipeName').value.trim();
+            const basePortions = Number($('#recipePortions').value);
+            const notes = $('#recipeNotes').value.trim();
+
+            const ingredients = [
+                ...document.querySelectorAll('.recipe-ingredient-row')
+            ].map(row => ({
+                ingredient_name: row.querySelector('.ri-name').value.trim(),
+                quantity: Number(row.querySelector('.ri-quantity').value),
+                unit: row.querySelector('.ri-unit').value.trim()
+            }));
+
+            if (!name) return notice('Nama resep wajib diisi.');
+
+            if (!Number.isFinite(basePortions) || basePortions <= 0) {
+                return notice('Jumlah porsi dasar harus lebih dari nol.');
+            }
+
+            if (!ingredients.length) {
+                return notice('Tambahkan minimal satu bahan.');
+            }
+
+            for (const item of ingredients) {
+                if (!item.ingredient_name ||
+                    !Number.isFinite(item.quantity) ||
+                    item.quantity <= 0 ||
+                    !item.unit) {
+                    return notice('Lengkapi nama bahan, jumlah, dan satuannya.');
+                }
+            }
+
+            const button = $('#saveRecipe');
+            button.disabled = true;
+            button.textContent = 'Menyimpan...';
+
+            try {
+                if (editingRecipeId) {
+                    await api('recipes/' + editingRecipeId, {
+                        name,
+                        base_portions: basePortions,
+                        notes,
+                        ingredients
+                    }, 'PUT');
+
+                    notice('Resep berhasil diperbarui.');
+                } else {
+                    await api('recipes', {
+                        name,
+                        base_portions: basePortions,
+                        notes,
+                        ingredients
+                    });
+
+                    notice('Resep berhasil disimpan.');
+                }
+
+                closeRecipeForm();
+                await loadRecipes();
+
+            } catch (e) {
+                notice(e.message);
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Simpan resep';
+            }
+        };
+
+        async function calculateAI() { const menus = [...document.querySelectorAll('#menuRows .menu-row')].map(row => ({ name: row.querySelector('.mname').value.trim(), portions: Number(row.querySelector('.portion').value) })).filter(x => x.name); if (!menus.length) return notice('Masukkan minimal satu nama menu.'); if (menus.length > 10) return notice('Maksimal 10 menu sekali perhitungan.'); if (menus.some(x => !Number.isFinite(x.portions) || x.portions < 1 || x.portions > 5000)) return notice('Jumlah porsi harus antara 1 sampai 5000.'); const button = $('#calculateAI'); button.disabled = true; button.textContent = 'AI sedang menghitung...'; try { currentPlan = await api('plan', { menus }); renderAIPlan() } catch (e) { notice('Estimasi AI gagal: ' + e.message) } finally { button.disabled = false; button.textContent = '✦ Buat estimasi AI' } }
+
+        function renderAIPlan() {
+            const p = currentPlan; $('#planView').classList.remove('hide'); $('#rankView').classList.add('hide'); $('#planView').innerHTML = `<div class="card"><div class="toolbar"><div><h2>Hasil perhitungan</h2><span class="pill ${p.aiStatus === 'groq' ? '' : 'warn'}">${p.aiStatus === 'groq' ? 'Groq aktif' : p.aiStatus === 'fallback' ? 'Fallback / offline' : 'AI aktif'}</span></div><button class="secondary" id="refreshPlan">↻ Hitung ulang</button></div><div class="grid">${p.menus.map(m => `<article class="card" style="margin:0;box-shadow:none"><h3>${esc(m.name)}</h3><span class="pill ${m.source === 'groq' ? '' : 'warn'}">${m.source === 'groq' ? 'AI Groq' : m.source === 'fallback-demo' ? 'Resep demo' : 'Estimasi AI'}</span><div class="small">${m.portions} porsi</div><div class="nutrition"><div><b>${m.nutrition.kkal}</b><span>kkal/porsi</span></div><div><b>${m.nutrition.protein}</b><span>protein g</span></div><div><b>${m.nutrition.lemak}</b><span>lemak g</span></div><div><b>${m.nutrition.karbo}</b><span>karbo g</span></div></div><details><summary>Bahan terhitung (${m.ingredients.length})</summary><ul>${m.ingredients.map(i => `<li>${esc(i.name)}: ${i.net_g} g bersih/porsi</li>`).join('')}</ul></details></article>`).join('')}</div>${p.warnings.map(w => `<div class="notice">${w}</div>`).join('')}<h3 style="margin-top:22px">Kebutuhan belanja</h3><div class="tablewrap"><table><thead><tr><th>Bahan</th><th>Kebutuhan (kg)</th><th>Harga acuan/kg</th><th>Estimasi total</th></tr></thead><tbody>${p.items.map(i => `<tr><td>${esc(i.name)} ${i.id ? '' : '<span class="pill warn">Belum di katalog</span>'}</td><td>${i.id ? `<input class="kg" type="number" min="0" step=".01" data-id="${i.id}" value="${i.kg}">` : `${Number(i.kg).toFixed(2)} kg`}</td><td>${i.id && i.ref > 0 ? rp(i.ref) : 'Belum tersedia'}</td><td class="line-total" data-id="${i.id || ''}">${i.id && i.ref > 0 ? rp(i.kg * i.ref) : 'Belum dapat dihitung'}</td></tr>`).join('')}</tbody></table></div><div class="toolbar" style="margin-top:15px"><b id="grandTotal">Total acuan: ${rp(p.items.reduce((a, i) => a + (i.id && i.ref > 0 ? i.kg * i.ref : 0), 0))}</b><button id="rankBtn">Cari supplier terbaik →</button></div></div>`;
+            const update = () => { let sum = 0; document.querySelectorAll('.kg').forEach(el => { const i = p.items.find(x => x.id === el.dataset.id); if (!i) return; const kg = Math.max(0, Number(el.value) || 0), v = kg * (i.ref || 0); sum += v; const cell = document.querySelector(`.line-total[data-id="${i.id}"]`); if (cell) cell.textContent = i.ref > 0 ? rp(v) : 'Belum dapat dihitung'; i.kg = kg }); $('#grandTotal').textContent = 'Total acuan: ' + rp(sum); $('#rankView').classList.add('hide') };
+            document.querySelectorAll('.kg').forEach(el => el.addEventListener('input', update)); $('#refreshPlan').onclick = calculateAI; $('#rankBtn').onclick = rankSuppliers
+        }
+        // Menghitung kebutuhan bahan berdasarkan resep
+        async function calculateRecipes() {
+            const rows = [
+                ...document.querySelectorAll('.planner-recipe-row')
+            ];
+
+            const selections = rows.map(row => ({
+                recipe_id: row.querySelector('.planner-recipe-select').value,
+                portions: Number(row.querySelector('.planner-portions').value)
+            })).filter(x => x.recipe_id);
+
+            if (!selections.length) {
+                return notice('Pilih minimal satu resep.');
+            }
+
+            if (selections.some(x => !Number.isFinite(x.portions) || x.portions <= 0)) {
+                return notice('Target porsi harus lebih dari nol.');
+            }
+
+            const button = $('#calculate');
+            button.disabled = true;
+            button.textContent = 'Menghitung...';
+
+            try {
+                const details = await Promise.all(
+                    selections.map(x => api('recipes/' + x.recipe_id, null, 'GET'))
+                );
+
+                const requirements = {};
+
+                details.forEach((data, index) => {
+                    const recipe = data.recipe;
+                    const target = selections[index].portions;
+                    const multiplier = target / Number(recipe.base_portions);
+
+                    data.ingredients.forEach(ingredient => {
+                        const name = ingredient.ingredient_name;
+                        const unit = String(ingredient.unit).trim().toLowerCase();
+
+                        const catalog = catalogItems.find(item =>
+                            item.id === ingredient.ingredient_id
+                        ) || catalogItems.find(item =>
+                            item.name.trim().toLowerCase() === name.trim().toLowerCase()
+                        );
+
+                        let kg = null;
+                        let normalizedUnit = unit;
+
+                        if (unit === 'kg' || unit === 'kilogram' || unit === 'kilograms') {
+                            kg = Number(ingredient.quantity) * multiplier;
+                            normalizedUnit = 'kg';
+                        } else if (
+                            unit === 'g' ||
+                            unit === 'gram' ||
+                            unit === 'grams'
+                        ) {
+                            kg = Number(ingredient.quantity) * multiplier / 1000;
+                            normalizedUnit = 'kg';
+                        }
+
+                        const id = catalog?.id || null;
+                        const key = id
+                            ? id + '|' + normalizedUnit
+                            : name.trim().toLowerCase() + '|' + normalizedUnit;
+
+                        if (!requirements[key]) {
+                            requirements[key] = {
+                                id,
+                                name,
+                                unit: normalizedUnit,
+                                quantity: 0,
+                                kg: null,
+                                ref: Number(catalog?.ref) || 0,
+                                recipes: []
+                            };
+                        }
+
+                        if (kg !== null) {
+                            requirements[key].kg =
+                                (requirements[key].kg || 0) + kg;
+                        } else {
+                            requirements[key].quantity +=
+                                Number(ingredient.quantity) * multiplier;
+                        }
+
+                        requirements[key].recipes.push(recipe.name);
+                    });
+                });
+
+                const allItems = Object.values(requirements);
+
+                const items = allItems.filter(item =>
+                    item.id && item.kg !== null
+                );
+
+                currentPlan = {
+                    allItems,
+                    items
+                };
+
+                renderRecipePlan();
+
+            } catch (e) {
+                notice('Perhitungan gagal: ' + e.message);
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Hitung kebutuhan bahan →';
+            }
+        }
+
+        // Menampilkan hasil perhitungan resep
+        function renderRecipePlan() {
+            const p = currentPlan;
+            $('#planView').classList.remove('hide');
+            $('#rankView').classList.add('hide');
+            const priced = p.allItems.filter(item => item.id && item.kg !== null && item.ref > 0);
+            const total = priced.reduce((sum, item) => sum + item.kg * item.ref, 0);
+            $('#planView').innerHTML = `
+        <div class="card">
+          <div class="toolbar"><div><h2>Hasil kebutuhan bahan</h2><div class="muted">Semua bahan tetap dicatat. Harga dan supplier dicocokkan jika tersedia di katalog.</div></div><button class="secondary" id="refreshPlan">↻ Hitung ulang</button></div>
+          <h3>Daftar kebutuhan belanja</h3>
+          <div class="tablewrap"><table><thead><tr><th>Bahan</th><th>Kebutuhan</th><th>Harga acuan</th><th>Estimasi biaya</th></tr></thead><tbody>
+          ${p.allItems.map((item, index) => { const canMatch = item.id && item.kg !== null; const hasPrice = canMatch && item.ref > 0; return `<tr><td>${esc(item.name)} ${!item.id ? '<span class="pill warn">Belum di katalog</span>' : !canMatch ? '<span class="pill warn">Satuan belum didukung</span>' : !hasPrice ? '<span class="pill warn">Harga belum tersedia</span>' : ''}</td><td>${canMatch ? `<input class="kg" type="number" min="0" step=".001" data-id="${esc(item.id)}" value="${item.kg.toFixed(3)}">` : item.kg !== null ? `${Number(item.kg).toFixed(3)} ${esc(item.unit)}` : `${Number(item.quantity || 0).toFixed(3)} ${esc(item.unit)}`}</td><td>${hasPrice ? rp(item.ref) : 'Belum tersedia'}</td><td class="line-total" data-id="${esc(item.id || '')}">${hasPrice ? rp(item.kg * item.ref) : 'Belum dapat dihitung'}</td></tr>` }).join('')}
+          </tbody></table></div>
+          <div class="toolbar" style="margin-top:15px"><b id="grandTotal">Total estimasi bahan berkatalog: ${rp(total)}</b><button id="rankBtn" ${p.items.length ? '' : 'disabled'}>Cari supplier terbaik →</button></div>
+          ${p.allItems.some(i => !i.id) ? '<div class="notice" style="margin-top:16px">Sebagian bahan belum terdaftar di katalog. Bahan tersebut tetap ada dalam daftar belanja, tetapi belum dapat dicocokkan dengan stok supplier atau dihitung harganya.</div>' : ''}
+          ${p.allItems.some(i => i.id && !(i.ref > 0)) ? '<div class="notice">Ada bahan katalog yang belum memiliki harga acuan atau satuannya belum dapat dikonversi dengan aman.</div>' : ''}
+        </div>`;
+            const update = () => { let sum = 0; document.querySelectorAll('.kg').forEach(el => { const item = p.items.find(x => x.id === el.dataset.id); if (!item) return; const kg = Math.max(0, Number(el.value) || 0); item.kg = kg; const value = kg * (item.ref || 0); if (item.ref > 0) sum += value; const cell = document.querySelector(`.line-total[data-id="${el.dataset.id}"]`); if (cell) cell.textContent = item.ref > 0 ? rp(value) : 'Belum dapat dihitung' }); $('#grandTotal').textContent = 'Total estimasi bahan berkatalog: ' + rp(sum); $('#rankView').classList.add('hide') };
+            document.querySelectorAll('.kg').forEach(el => el.addEventListener('input', update));
+            $('#refreshPlan').onclick = calculateRecipes;
+            $('#rankBtn').onclick = rankSuppliers;
+        }
+
+        async function rankSuppliers() {
+            try {
+                const items = [...document.querySelectorAll('.kg')].map(el => ({ id: el.dataset.id, kg: Number(el.value) || 0 })).filter(i => i.kg > 0);
+                const allItems = currentPlan?.allItems || currentPlan?.items || [];
+                const unmatched = allItems.filter(i => !i.id).map(i => ({ name: i.name, quantity: i.kg ?? i.quantity ?? 0, unit: i.unit || 'kg' }));
+                const { ranking } = await api('suppliers/rank', { items, unmatched });
+                $('#rankView').classList.remove('hide');
+                $('#rankView').innerHTML = `<div class="card"><div class="toolbar"><div><h2>Rekomendasi supplier</h2><div class="muted">Supplier diurutkan berdasarkan pemenuhan stok, harga, dan jarak.</div></div><button class="secondary" id="refreshRanking">↻ Refresh ranking</button></div>
+  ${unmatched.length ? `<div class="notice"><b>${unmatched.length} bahan belum bisa dicocokkan dengan supplier</b><br>${unmatched.map(i => `${esc(i.name)} (${Number(i.quantity).toFixed(2)} ${esc(i.unit)})`).join(' · ')}. Bahan ini tetap ada di daftar belanja, tetapi belum terdaftar di katalog.</div>` : ''}
+  ${ranking.map((s, i) => `<div class="supplier-card ${i === 0 ? 'best' : ''}"><div class="toolbar"><h3>${i + 1}. ${esc(s.name)} ${i === 0 ? '<span class="pill">Paling cocok</span>' : ''}</h3><b>Skor ${s.score}</b></div><div class="bar"><i style="width:${Math.max(0, Math.min(100, s.score))}%"></i></div><div class="small">${esc(s.address || 'Lokasi belum diisi')} · ${s.km ?? '—'} km · Pemenuhan ${Math.round(s.fill * 100)}% (${s.availableCount}/${s.matchedCount} jenis bahan) · Estimasi barang tersedia ${rp(s.total)}</div>
+  ${s.available?.length ? `<div class="success" style="margin-top:10px"><b>Tersedia:</b> ${s.available.map(x => `${esc(x.name)} (${x.quantity_kg} kg)`).join(', ')}</div>` : ''}
+  ${s.missing?.length ? `<div class="notice"><b>Perlu dibeli dari supplier lain:</b><br>${s.missing.map(x => `${esc(x.name)} — ${esc(x.status)}, tersedia ${x.available_kg} kg dari ${x.needed_kg} kg (kurang ${x.shortage_kg} kg)`).join('<br>')}</div>` : '<div class="success" style="margin-top:10px">Semua bahan katalog yang diminta tersedia.</div>'}
+  <button class="secondary order" data-name="${esc(s.name)}">Salin pesanan yang tersedia</button></div>`).join('')}</div>`;
+                $('#refreshRanking').onclick = rankSuppliers;
+                document.querySelectorAll('.order').forEach(b => b.onclick = () => { const lines = [...document.querySelectorAll('.kg')].filter(el => Number(el.value) > 0).map(el => { const item = allItems.find(x => x.id === el.dataset.id); return item ? `- ${item.name}: ${el.value} kg` : null }).filter(Boolean); const text = `Halo ${b.dataset.name}, saya ingin memesan barang yang tersedia:\n${lines.join('\n')}\nMohon konfirmasi stok dan harga.`; navigator.clipboard?.writeText(text).then(() => notice('Pesanan disalin')).catch(() => prompt('Salin pesanan', text)) });
+            } catch (e) { notice(e.message) }
+        }
+
+        async function loadSupplier() { const d = await api('supplier/me', null, 'GET'); const s = d.supplier; $('#sName').value = s.name || ''; $('#sPhone').value = s.phone || ''; $('#sAddress').value = s.address || ''; $('#sLat').value = s.lat ?? ''; $('#sLng').value = s.lng ?? ''; $('#supplierStats').innerHTML = `<div class="stat"><strong>${d.stock.length}</strong><span>Jenis barang</span></div><div class="stat"><strong>${d.stock.reduce((a, x) => a + x.quantity_kg, 0).toFixed(1)}</strong><span>Total stok kg</span></div><div class="stat"><strong>${d.stock.filter(x => x.quantity_kg > 0).length}</strong><span>Barang tersedia</span></div>`; $('#stockRows').innerHTML = d.stock.map(x => `<tr data-id="${x.id}"><td>${esc(x.name)}</td><td><input class="stockqty" type="number" min="0" step=".1" value="${x.quantity_kg}"></td><td><input class="stockprice" type="number" min="0" value="${x.price_per_kg}"></td><td class="small">tersimpan</td></tr>`).join(''); }
+        async function login() { try { const r = await api('login', { username: $('#username').value, password: $('#password').value }); token = r.token; me = r.user; setView(); $('#aiBadge').textContent = r.ai === 'groq' ? 'Groq aktif · ' + (r.model || 'AI') : (r.ai || 'AI') + ' · ' + (r.model || 'tidak aktif'); $('#aiBadge').classList.toggle('warn', r.ai !== 'groq'); if (me.role === 'supplier') await loadSupplier(); if (me.role === 'admin') await loadAdmin() } catch (e) { notice(e.message) } }
+        $('#loginBtn').onclick = login; $('#password').addEventListener('keydown', e => { if (e.key === 'Enter') login() });
+        $('#register').onclick = async () => { try { const r = await api('register', { name: $('#regName').value, username: $('#regUser').value, password: $('#regPass').value, phone: $('#regPhone').value, address: $('#regAddress').value }); token = r.token; me = r.user; setView(); await loadSupplier() } catch (e) { notice(e.message) } };
+        $('#addMenu').onclick = () => { if ($('#menuRows').children.length >= 10) return notice('Maksimal 10 menu per perhitungan.'); menuRow(); }; $('#resetMenus').onclick = () => { $('#menuRows').innerHTML = ''; menuRow(); $('#planView').classList.add('hide'); $('#rankView').classList.add('hide') }; $('#calculateAI').onclick = calculateAI;
+
+        $('#addPlannerRecipe').onclick = addPlannerRecipeRow;
+
+        $('#refreshPlanner').onclick = async () => {
+            await loadPlannerData();
+            notice('Data resep dan katalog diperbarui.');
+        };
+
+        $('#calculate').onclick = calculateRecipes;
+
+        $('#saveProfile').onclick = async () => { try { await api('supplier/profile', { name: $('#sName').value, phone: $('#sPhone').value, address: $('#sAddress').value, lat: $('#sLat').value, lng: $('#sLng').value }); notice('Profil supplier tersimpan.') } catch (e) { notice(e.message) } };
+        $('#refreshStock').onclick = loadSupplier; $('#saveStock').onclick = async () => { try { for (const r of document.querySelectorAll('#stockRows tr')) await api('supplier/stock', { ingredient_id: r.dataset.id, quantity_kg: r.querySelector('.stockqty').value, price_per_kg: r.querySelector('.stockprice').value }); await loadSupplier(); notice('Semua stok dan harga berhasil diperbarui.') } catch (e) { notice(e.message) } };
+        $('#addCatalog').onclick = async () => { try { const r = await api('supplier/catalog', { name: $('#newItemName').value, alias: $('#newItemAlias').value, ref_price: $('#newItemPrice').value }); const stock = await api('supplier/stock', { ingredient_id: r.id, quantity_kg: 0, price_per_kg: $('#newItemPrice').value }); await loadSupplier(); notice('Barang baru ditambahkan ke katalog dan stok supplier.') } catch (e) { notice(e.message) } };
+        async function loadAdmin() { const d = await api('admin/summary', null, 'GET'); $('#adminStats').innerHTML = `<div class="stat"><strong>${d.users.length}</strong><span>Total pengguna</span></div><div class="stat"><strong>${d.suppliers.length}</strong><span>Supplier</span></div><div class="stat"><strong>${d.plans}</strong><span>Rencana tersimpan</span></div>`; $('#userRows').innerHTML = d.users.map(u => `<tr><td>${esc(u.name)}</td><td>${esc(u.username)}</td><td>${esc(u.role)}</td><td>${esc(u.created_at)}</td></tr>`).join('') }
+        $('#refreshAdmin').onclick = loadAdmin; $('#createUser').onclick = async () => { try { await api('admin/users', { name: $('#aName').value, username: $('#aUser').value, password: $('#aPass').value, role: $('#aRole').value }); await loadAdmin(); notice('Akun berhasil dibuat.') } catch (e) { notice(e.message) } };
+        $('#logout').onclick = async () => { try { await api('logout', {}) } catch { } location.reload() };
+    </script>
+</body>
+
+</html>
