@@ -7,6 +7,7 @@
 - Perhitungan estimasi harga berubah langsung saat kuantitas kg diedit.
 - Tombol refresh/hitung ulang, hapus menu, reset menu, dan refresh ranking.
 - Gemini API dapat dikonfigurasi melalui `.env` (dibaca otomatis oleh dotenv saat server mulai); fallback demo ditandai secara jelas.
+- haloo
 
 ## Persyaratan
 Node.js 20 atau lebih baru. SQLite tidak perlu dipasang terpisah karena memakai `better-sqlite3`.
