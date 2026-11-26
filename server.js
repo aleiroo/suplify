@@ -9,10 +9,12 @@ const { CATALOG, FALLBACK } = require('./data');
 const PORT = process.env.PORT || 3000;
 const KEY = process.env.GROQ_API_KEY;
 const MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-20b';
-const DB_FILE = process.env.GEMINI_EMBED_MODEL || 'gemini-embedding-001';
+
+const DB_FILE = process.env.DB_PATH || path.join(__dirname, 'data', 'bahantepat.sqlite');
 
 fs.mkdirSync(path.dirname(DB_FILE), { recursive: true });
 const db = new Database(DB_FILE);
+
 db.pragma('journal_mode = WAL');
 db.pragma('foreign_keys = ON');
 

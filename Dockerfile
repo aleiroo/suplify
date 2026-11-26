@@ -1,7 +1,12 @@
 FROM node:20-slim
+
 WORKDIR /app
-COPY . .
+
+COPY package*.json ./
 RUN npm install
-EXPOSE 7860
-ENV PORT=7860
+
+COPY . .
+
+EXPOSE 3000
+
 CMD ["node", "server.js"]
